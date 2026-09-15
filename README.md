@@ -84,17 +84,17 @@ uv run pytest
 
 ## Standalone Executable Packaging
 
-To build a standalone executable distribution with PyInstaller:
+To build a single standalone executable with PyInstaller:
 
 ```bash
-# Build onedir bundle in dist/etlgup
+# Build standalone single-file executable at dist/etlgup
 uv run python build_installer.py
 
-# Or build single-file executable
-uv run python build_installer.py --onefile
+# Or optionally build directory bundle in dist/etlgup/
+uv run python build_installer.py --onedir
 ```
 
-The resulting executable will be located at `dist/etlgup/etlgup` (or `dist/etlgup` for single-file builds).
+The resulting single standalone executable will be located at `dist/etlgup`.
 
 ---
 

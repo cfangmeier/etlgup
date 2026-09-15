@@ -12,11 +12,22 @@ def test_build_script_and_spec_exist():
     assert spec_file.is_file(), "etlgup.spec should exist"
 
 
+def test_packaged_executable_is_single_file():
+    root = Path(__file__).resolve().parent.parent
+    exe = root / "dist" / "etlgup"
+    if not exe.exists():
+        pytest.skip("Packaged binary dist/etlgup not yet built")
+    assert exe.is_file(), "Packaged artifact dist/etlgup should be a single executable file, not a directory"
+    assert os.access(exe, os.X_OK), "Packaged binary should be executable"
+
+
 def test_packaged_executable_launch():
     root = Path(__file__).resolve().parent.parent
-    exe = root / "dist" / "etlgup" / "etlgup"
+    exe = root / "dist" / "etlgup"
+    if exe.is_dir():
+        exe = exe / "etlgup"
     if not exe.is_file():
-        pytest.skip("Packaged binary dist/etlgup/etlgup not yet built")
+        pytest.skip("Packaged binary dist/etlgup not yet built")
 
     assert os.access(exe, os.X_OK), "Packaged binary should be executable"
 
